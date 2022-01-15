@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Olympic Gold Data-Letes</title>
+
+    <!-- Reset CSS -->
+    <link rel="stylesheet" href="../static/css/reset.css">
+
+    <!-- Bootstrap CDN Versions of jQuery and Popper -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> <!-- Dropdown Menu -->
+
+    <!-- Bootstrap CDN Versions of Min CSS and Min JS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Specific Bootstrap Theme CSS -->
+    <link rel="stylesheet" href="../static/css/bootstrap-lux.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+
+    <!-- Leaflet Slider CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/leaflet-slider.css"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+
+
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-danger bg-danger sticky-top" id="navbar-narrow">
+            <a class="navbar-brand" href="#">
+                <a href="/"><img style="padding-right: 15px" src="../static/assets/icon.png" width="80px" height="30px"></a>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse"id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="/female">Female</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/male">Male</a>
+                    </li>
+                -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/observations">GDP</a>
+                    </li>
+
+                    <!--
+
+                     <li class="nav-item">
+                        <a class="nav-link" href="/maggie">Maggie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/maggiemale">Maggie Male</a>
+                    </li>
+                -->
+                </ul>
+            </div>
+    </nav>
+
+    
+<div class="wrapper">
+    <div class="hero heroLanding text-center">
+        <h1 style="color: white; margin-top: 100px";>Olympic<br>Gold<br>Data-letes</h1>
+    </div>
+    <div class="col-md-12" style="padding: 1rem; background-color:#f7f7f9" > 
+        <div>
+        <h1>Introduction</h1>
+       
+            <p>The Olympics is an exciting event where the best athletes from all around the world gather to compete in various sports. 
+        In this project, we delve into the effects that GDP and gender have on the number of gold medal wins. 
+        Click on the tabs and explore around to uncover our findings!.
+        <br>
+        <br>
+        Below are three interactive charts that look at different aspects to answer our questions. The first, is a choropleth 
+        map to show the amount of gold medals won by each country out of the total amount of gold medals won by all nations. 
+        The second, is a bubble chart depicting the relationship between each country’s GDP per capital and the amount of 
+        medals won. Each marker’s color is representative of the medal type won, and its size representative of the country’s 
+        GDP.  The third, is a line chart showing the relationship between population and the amount of medals won. </p>
+        
+    </div>
+</div>
+
+    <div class="container">
+
+        <!-- Choropleth Map -->
+        <div class="row">
+            <div class="col-md-12"> 
+                <div id="map" style="width: 100%; height: 500px"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                
+            </div>
+        </div> 
+    </div> <!-- Container End -->
+</div> <!-- Wrapper End -->
+
+
+<div class="wrapper">
+        <div class="row"><img class="cover" src="../static/assets/stadium_cr.jpg" width="100%" height="400px"></div>
+</div> <!-- Wrapper End -->
+
+<!--
+<div class="wrapper" style="margin-top: 0.5em;">
+    
+    <div class="container">
+            
+
+        <div class="row">
+            <div class="row">
+                <div class="col-md-2 dashboardrow1">
+                    <div class="well menustyle">
+                        <h6 class="menutitle">Male / Female Drop Down?</h6>
+                        <select id="selDataset" class="dropdown"></select>
+                    </div>
+                </div>
+            </div>
+                    
+                    <div class="panel panel-primary panelstyle">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">Visuals?</h5>
+                    </div>
+                    <div id="sample-metadata" class="panel-body" width="500"></div>
+                    </div>
+                    </div>
+                    
+
+            <div class="col-md-10 dashboardrow1">
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <div id="bar_stacked" class="chartbox">
+                    <canvas id="myjsChart" width="500" height="500"></canvas>
+                    <script id="myChart"></script>
+                    <canvas id="myFemaleChart" width="500" height="500"></canvas>
+                    <script id="myChart"></script>
+                    <canvas id="myMaleChart" width="500" height="500"></canvas>
+                    <script id="myChart"></script>
+                </div>
+            </div>
+        </div>
+    -->
+    <br>
+                <div class="col-md-12">
+                    <canvas id="bubble" class="chartjs" width="770" height="400" style="display:block; width: 100%; height: 400px"></canvas>
+                </div> 
+            <br>
+            <br>
+
+            <div class="row">
+                <div class="col-md-2 my-auto" style="padding:2rem;">
+                    <p>Check our analysis of countries population sizes compared to the percent of medals won winter games from 1960 to 2014.</p>
+                    <h5>Select Your Country:</h5>
+                    <select id="selCountrySet" onchange="optionChanged(this.value)"></select>
+                </div>
+                <div class="col-md-10"> 
+                    <div id="line" style="width: 100%; height: 400px"></div>
+                </div>
+            
+            
+            <!--
+            <div class="col-md-10"> 
+                <div id="line" style="width: 100%; height: 400px"></div>
+            </div>
+        -->
+        </div> 
+    </div> <!-- Container End -->
+
+        <footer class="footer bg-danger">
+            <div class="container" ><br>
+                    <p class="footer bottom bg-danger" style="color: #ffffff">
+                        Maggie Sun:   <a href="https://www.linkedin.com/in/maggie-sun-30439913b/" target="_blank" style="color: #919aa1">LinkedIn</a>  |  <a href="https://github.com/maggzesun" target="_blank" style="color: #919aa1">GitHub</a><br>
+                        Luke Fuller:   <a href="https://www.linkedin.com/in/luke-fuller-33830772/" target="_blank" style="color: #919aa1">LinkedIn</a>  |  <a href="https://github.com/AtreidesArcade" target="_blank" style="color: #919aa1">GitHub</a><br>
+                        
+                    </p>
+            </div>
+        </footer>
+
+</div> <!-- Wrapper End -->
+
+
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+   <!--- <script src="https://d3js.org/d3.v7.min.js"></script> -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="static/js/geojson.js"></script>
+    <script type="text/javascript" src="static/js/leaflet-slider.js"></script>
+    <script type="text/javascript" src="static/js/config.js"></script>
+    <script type="text/javascript" src="static/js/choropleth.js"></script>
+    <script type="text/javascript" src="static/js/line_graph.js"></script>
+    <script type="text/javascript" src="static/js/bubble.js"></script>
+    <script src="app.js"></script>
+    <script type="text/javascript" src="static/js/app.js"></script>
+
+
+    <!-- <script type="text/javascript" src="static/js/scatter.js"></script> -->
+    <script type="text/javascript" src="static/js/choropleth_color.js"></script>
+</body>
+
+</html>

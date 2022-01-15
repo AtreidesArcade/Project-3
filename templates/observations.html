@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GDP vs. Medals</title>
+
+    <!-- Reset CSS -->
+    <link rel="stylesheet" href="../static/css/reset.css">
+
+    <!-- Bootstrap CDN Versions of jQuery and Popper -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> <!-- Dropdown Menu -->
+
+    <!-- Bootstrap CDN Versions of Min CSS and Min JS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Specific Bootstrap Theme CSS -->
+    <link rel="stylesheet" href="../static/css/bootstrap-lux.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+
+    <!-- Leaflet Slider CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/leaflet-slider.css"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+
+
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-danger bg-danger sticky-top" id="navbar-narrow">
+            <a class="navbar-brand" href="#">
+                <a href="/"><img style="padding-right: 15px" src="../static/assets/icon.png" width="80px" height="30px"></a>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse"id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                   <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="/female">Female</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/male">Male</a>
+                    </li>
+                -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/observations">GDP</a>
+                    </li>
+                </ul>
+            </div>
+    </nav>
+
+    
+<div class="wrapper">
+    
+    <div class="hero heroMethod text-center">
+        <h1 style="color: white";>GDP vs Medal Analysis</h1>
+    </div>
+    
+    <div class="container">
+
+        <!-- Goal & Data -->
+        <div class="row"><h2>GOAL</h2></div>
+        <div class="row">
+            <p style="font-size: 16px"> Our objectives were build an interactive dashboard to visualize trends related to a country’s performance in the Winter Olympic games and ,through statisctical analysis, better understand the effects that GDP and gender have on the number of gold medal wins.
+             </p>
+        </div>
+
+        <div class="row"><h2>DATA ENGINEERING</h2></div>
+        <div class="row">
+            
+            <p style="font-size: 16px">This application is designed as an extension to our Project 1 "Where has all the Gold Gone" found <a href="https://github.com/AtreidesArcade/Python-Project-1" target="_blank">here</a>  and delivers a highly interactive statistical analysis of historical Olympic Medal Data. 
+            The original data was downloaded as csv files from Kaggle and the World Bank, before being cleaned using 
+            Python, Pandas, NumPy and pushed to a Postgres database using SQLAlchemy.<br>
+            <br>
+            The new csv files were then taken and converted into a SQLite database for this project. SQLite was used 
+            for a more efficient connection, rather than connecting directly to the Postgres database and remapping the tables. 
+            After connecting to the database with SQLAlchemy, further cleaning was done using Python inside Jupyter Notebook to 
+            format the data to the structure necessary for this analysis before returning the data as a JSON.</p>
+        </div>
+
+        <!-- Choropleth Map -->
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <h2>ANALYSIS</h2>
+                    <br>
+                    <h5>Percentage of Gold Medals Won</h5>
+                    
+                    <p style="font-size: 16px">
+                    We first wanted to create a summarized view performance by countires. To visualize this, we decided on a choropleth map using <code>Leaflet.js</code> and 
+                    <code>geoJSON</code> to represent the percentage of gold medals won by each country out of all available gold 
+                    medals each year. Athletes from countries with colder climates tend to be more successful, suggesting that monetary wealth is not the only indicator of success. 
+                    Future analysis would look into climate as well as elevation and compare performance each year of the games to the location of the games.
+                    </p>
+            </div>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-md-12"> 
+                <div id="map" style="width: 100%; height: 400px"></div>
+            </div>
+        </div>
+
+        <!-- Bubble Plot -->
+        <div class="row" style="margin-top: 2rem">
+            <div class="col-md-12">
+                <h5>GDP VS. MEDALS</h5>
+                
+                <p style="font-size: 16px">
+                As a way to showcase the relationship between GDP Per Capita and Medals won, we created bubble plot using <code>chart.js</code>, markers were grouped by medal type, and the radius set to represent GDP. The expectation was to see larger circles higher up 
+                the y-axis, which represented the total count of medals. However, the markers highest up the y-axis, were not the same 
+                markers with greater radii. This signaled that GDP may not be as influential as initially assumed. Future 
+                analyses would look for any shared attributes between highest performing countries and compare that to any shared 
+                attributes between countries with higher GDP.</p>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-md-12">
+                <canvas id="bubble" class="chartjs" width="670" height="300" style="display:block; width: 770px; height: 400px"></canvas>
+            </div>
+        </div> 
+
+        <!-- Line Graph -->
+        <div class="row">
+            <div class="col-md-12">
+                <h5>PERCENTAGE OF POPULATION VS. PERCENTAGE OF MEDALS</h5>
+            </div>
+        </div> 
+        <div class="row">
+            
+            <div class="col-md-12">
+                <p style="font-size: 16px">
+                Using <code>plotly.js</code> , a line graph was made that compares individual country 
+                performances, analyzing the relationship between population size and percentage of medals won. A 
+                country’s relative population size was calculated by dividing said country’s population over the sum population 
+                of all countries that medaled in a given year. This means that only countries that won medals were taken into 
+                consideration. If a country did not win any medals in a specified year, their population data was not used. The 
+                assumption was that a country with more competing athletes would then also win more medals. Total world population 
+                was not used as it was not the best representation of who competes in the Winter Olympics.<br>
+                <br>
+                We did not find a strong correlation between population and medals. China 
+                had a consistently high relative population (53-56%) and yet only won 1-3% of available medals. Norway on the other 
+                hand, had a consistently low relative population (less than 1%) and yet performed at a consistently high level. Again, 
+                pointing to the idea that perhaps climate is a stronger indicator of performance.</p>
+            </div>
+        
+        </div> 
+        <div class="row">
+            <div class="col-md-2 my-auto" style="padding:2rem;">
+                <p>Check our analysis of countries population sizes compared to the percent of medals won winter games from 1960 to 2014.</p>
+                <h5>Select Your Country:</h5>
+                <select id="selCountrySet" onchange="optionChanged(this.value)"></select>
+            </div>
+            <div class="col-md-10"> 
+                <div id="line" style="width: 100%; height: 400px"></div>
+            </div>
+        </div> 
+        
+        <!-- Discussion 
+       
+        -->
+    </div> <!-- Container End -->
+
+    <footer class="footer bg-danger">
+        <div class="container"><br>
+                <p class="footer bottom bg-danger" style="color: #ffffff">
+                    Maggie Sun:   <a href="https://www.linkedin.com/in/maggie-sun-30439913b/" target="_blank" style="color: lightskyblue">LinkedIn</a>  |  <a href="https://github.com/maggzesun" target="_blank" style="color:lightskyblue">GitHub</a><br>
+                    Luke Fuller:   <a href="https://www.linkedin.com/in/luke-fuller-33830772/" target="_blank" style="color: lightskyblue">LinkedIn</a>  |  <a href="https://github.com/AtreidesArcade" target="_blank" style="color: lightskyblue">GitHub</a><br> </p>
+        </div>
+    </footer>
+
+</div> <!-- Wrapper End -->
+
+
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script type="text/javascript" src="static/js/geojson.js"></script>
+    <script type="text/javascript" src="static/js/leaflet-slider.js"></script>
+    <script type="text/javascript" src="static/js/config.js"></script>
+    <script type="text/javascript" src="static/js/choropleth.js"></script>
+    <script type="text/javascript" src="static/js/line_graph.js"></script>
+    <script type="text/javascript" src="static/js/bubble.js"></script>
+    <script type="text/javascript" src="static/js/choropleth_color.js"></script>
+</body>
+
+</html>
