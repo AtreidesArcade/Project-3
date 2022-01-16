@@ -15,6 +15,8 @@ from sqlalchemy import create_engine
 
 import sqlite3
 
+app = Flask(__name__)
+
 # Create an instance of Flask
 app = Flask(__name__)
 
@@ -48,41 +50,63 @@ def home():
 
 
 #Route for Maggie - Female bar graph and scatter plaots
-@app.route("/maggie")
-def maggie():
-   return render_template("maggie.html")
+#@app.route("/maggie.html")
+#def maggie():
+ 
+
+#@app.route("/maggieData")
+#def maggieData():
+#   return render_template("maggie.html")
 
 # Route for Maggie Male bar graph and scatter plots
-@app.route("/maggiemale")
-def maggiemale():
-   return render_template("maggiemale.html")
+#@app.route("/maggiemale.html")
+#def maggiemale():
+   #return render_template("maggiemale.html")
 
+
+#@app.route("/maggieData")
+#def maggieData2():
+#    return render_template("maggiemale.html")
 
 # Route for gdp
 @app.route('/observations')
 def method():
     return render_template("observations.html")
+    
 
 #Route for female page 
-@app.route('/female')
-def female():
-    return render_template("female.html")
-    
+#@app.route('/female')
+#def female():
+#   return render_template('maggie.html')
+   
+#@app.route('/female')
+#def female():
+#    return render_template('maggie.html')
+   
+#@app.route('/female')
+#def athletes_data_json():
+   # filename = os.path.join(app.static_folder, 'athletes_data.json')
+   # with open(filename) as test_file:
+       # data = json.load(test_file)
+   # return render_template('maggie.html', data = data)
+
+
+
 # Route for male page of project
-@app.route('/male')
-def male():
-    return render_template("male.html")
+#@app.route('/male')
+#def male():
+#    return render_template("maggiemale.html")
 
 # Route to get data for choropleth map and scatter plot
 @app.route("/gdp_medals")
 def gdp_medals():
     
-    # Connect to PostgreSQL database
+    #Connect to PostgreSQL database
     conn = sqlite3.connect("./Resources/gdp_olympic.sqlite")
     #engine = create_engine(f'postgresql://{username}:{password}@localhost/olympic_data')
     #conn = engine.connect()
     #conn = psycopg2.connect(database="olympic_data", user='postgres', password='password', host='127.0.0.1', port= '5432')
-    #cursor = conn.cursor()
+    cursor = conn.cursor()
     # Selected needed values from winter table
     winter_df = pd.read_sql('SELECT year, country_code, medal FROM winter', conn)
 
@@ -168,3 +192,4 @@ def line_graph():
 # End Flask
 if __name__ == "__main__":
     app.run(debug=False)
+
